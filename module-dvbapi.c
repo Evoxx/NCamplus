@@ -1126,6 +1126,7 @@ static int32_t dvbapi_get_descrambler_info(void)
 	// We got a valid response from device (count the ECD type only)
 	if(descr_info.num > 0 && (descr_info.type & 1))
 	{
+                //ca_descramblers_total = 64; # For vuduo4k
 		ca_descramblers_total = descr_info.num;
 		cs_log("Detected %s device, total available descramblers: %d", device_path, ca_descramblers_total);
 		return 1;
@@ -5260,7 +5261,7 @@ void event_handler(int32_t UNUSED(signal))
 			continue;
 		}
 
-		int32_t pmt_id;
+		int32_t demux_id;
 #ifdef QBOXHD
 		uint32_t j1, j2;
 
@@ -5287,7 +5288,7 @@ void event_handler(int32_t UNUSED(signal))
 			}
 		}
 		cs_log_dump_dbg(D_DVBAPI, (uint8_t *)dest, len / 2, "QboxHD pmt.tmp:");
-		pmt_id = dvbapi_parse_capmt((uint8_t *)dest + 4, (len / 2) - 4, -1, dp->d_name, 0, 0, 0, 0);
+		demux_id = dvbapi_parse_capmt((uint8_t *)dest + 4, (len / 2) - 4, -1, dp->d_name, 0, 0, 0, 0);
 #else
 		if(len > sizeof(dest))
 		{
@@ -5311,12 +5312,12 @@ void event_handler(int32_t UNUSED(signal))
 		dest[6] = 0;
 		memcpy(dest + 7, mbuf + 12, len - 12 - 4);
 
-		pmt_id = dvbapi_parse_capmt((uint8_t *)dest, 7 + len - 12 - 4, -1, dp->d_name, 0, 0, 0, 0);
+		demux_id = dvbapi_parse_capmt((uint8_t *)dest, 7 + len - 12 - 4, -1, dp->d_name, 0, 0, 0, 0);
 #endif
-		if(pmt_id >= 0)
+		if(demux_id >= 0)
 		{
-			cs_strncpy(demux[pmt_id].pmt_file, dp->d_name, sizeof(demux[pmt_id].pmt_file));
-			demux[pmt_id].pmt_time = (time_t)pmt_info.st_mtime;
+			cs_strncpy(demux[demux_id].pmt_file, dp->d_name, sizeof(demux[demux_id].pmt_file));
+			demux[demux_id].pmt_time = (time_t)pmt_info.st_mtime;
 		}
 
 		if(cfg.dvbapi_pmtmode == 3)
