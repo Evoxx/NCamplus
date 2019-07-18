@@ -366,8 +366,8 @@ typedef uint8_t uint8_t;
 /* ===========================
  *         constants
  * =========================== */
-#define CS_VERSION    "10.1"
-#define DATE_BUILD    "13-06-2019"
+#define CS_VERSION    "10.3"
+#define DATE_BUILD    "18-07-2019"
 #define CS_REVISION   "r1"
 #ifndef CS_SVN_VERSION
 #define CS_SVN_VERSION "stable"
