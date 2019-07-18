@@ -46,7 +46,7 @@ pthread_mutex_t emu_key_data_mutex;
 
 static inline uint32_t get_nemu_version(void)
 {
-	return atoi("$Version: 796 $" + 10);
+	return atoi("$Version: 797 $" + 10);
 }
 
 static void set_hexserial_to_version(struct s_reader *rdr)
