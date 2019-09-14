@@ -904,7 +904,7 @@ void add_emu_reader(void)
 	}
 #endif
 
-	cs_log("NCam version %d", get_nemu_version());
+	cs_log("NCam+ version %d", get_nemu_version());
 }
 
 #endif // WITH_EMU
