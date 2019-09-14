@@ -509,9 +509,9 @@ FILE *create_config_file(const char *conf_filename)
 		cs_log("ERROR: Cannot create file \"%s\" (errno=%d %s)", temp_file, errno, strerror(errno));
 		return NULL;
 	}
-	fprintf(f, "# %s generated automatically by NCAM %s\n",
+	fprintf(f, "# %s generated automatically by NCam+ %s\n",
 			conf_filename, CS_VERSION);
-	fprintf(f, "# Read more: https://www.tunisia-sat.com/forums/threads/3539021/\n\n");
+	fprintf(f, "# Read more: https://openspa.info/\n\n");
 	return f;
 }
 
